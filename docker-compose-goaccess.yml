@@ -1,0 +1,28 @@
+services:
+  goaccess:
+    image: xavierh/goaccess-for-nginxproxymanager:latest     # for best practice do not install latest package 
+    container_name: goaccess
+    restart: always
+    ports:
+      - "7880:7880"       # change this port to your desire port 
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin     # change to your time zone 
+      - SKIP_ARCHIVED_LOGS=False      #optional
+      - DEBUG=False #optional
+      - BASIC_AUTH=True #optional      # change this to False
+      - BASIC_AUTH_USERNAME=admin    #optional     # change this
+      - BASIC_AUTH_PASSWORD=changeme    #optional   #  change this
+      - EXCLUDE_IPS=127.0.0.1 #optional -comma delimited
+      - LOG_TYPE=NPM   #optional
+    volumes:
+      - /root/docker/data/npm/data/logs:/opt/log                   # change this to your npm logs directory 
+
+    networks:
+      - nginx_proxy
+
+networks:
+  nginx_proxy:
+    external: true
+

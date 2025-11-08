@@ -1,0 +1,62 @@
+first you need to have npm(nginx proxy manager) running with cloudflared 
+
+if you do not have you can check my github to see how to create one using docker compose 
+
+using docker compose create a docker-compose-goaccess.yml 
+
+you can copy the yaml file 
+
+run it 
+
+first make sure that your npm and goaccess are on the same docker network
+
+docker network ls     # check the npm network 
+
+then get the npm logs by going to where you have npm logs 
+
+start the goaccess yml 
+
+docker compose -f docker-compose-goaccess.yml up -d 
+
+docker ps    # to confirm if the goaccess is created 
+
+if its created you can check the logs of the goaccess if there is no error 
+
+
+if no error 
+
+next step go to your cloudflared login then search for Tunnel 
+
+then you need to create a hostname and others you can check on my github steps to do that or Youtube 
+
+add the goaccess to the tunnel then enter IP address of your ubuntu server then SAVE 
+
+go to npm url page then click on Hosts then Add Proxy Host 
+
+add your goaccess just the way you add it on cloudflared 
+
+choose http 
+destination goaccess 
+port 7880
+
+enable Cache Assets 
+enable Block Common Exploits 
+enable Websockets Support 
+
+then go to SSL 
+
+generate SSL certificate if you do not have one but if you already have one select to add from the drop down 
+
+enable Force SSL 
+enable HTTP/2 Support 
+enable HSTS Enabled 
+enable HSTS Subdomains 
+
+then SAVE
+
+click the goaccess from the npm then you will be in the goaccess Dashboard 
+
+if you set password you will be ask to enter your username and password to Login 
+
+
+
